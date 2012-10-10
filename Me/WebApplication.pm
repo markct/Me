@@ -31,6 +31,8 @@ sub AUTOLOAD {
 		} elsif ($ENV{CONTENT_TYPE} =~ m{^application/json}) {
 			eval { require JSON } or die $@; # lazy-load JSON
 			return $this->{_POST} = JSON::decode_json($this->RAW_POST);
+		} else {
+			return {};
 		}
 
 	} elsif ($method eq 'COOKIE') {
